@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="/Users/wujunxuan/Desktop/tools/mavenRepository/mysql/mysql-connector-java/5.1.41/mysql-connector-java-5.1.41.jar" />
+
+	<context
+		id="DB2Tables"
+		targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property
+				name="suppressAllComments"
+				value="false" /><!-- 是否取消注释 -->
+			<property
+				name="suppressDate"
+				value="true" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+
+
+		<jdbcConnection
+			driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/ssm_crud?useUnicode=true&amp;characterEncoding=UTF-8"
+			userId="root"
+			password="wjx122003">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property
+				name="forceBigDecimals"
+				value="false" />
+		</javaTypeResolver>
+
+		<!-- javabean -->
+		<javaModelGenerator
+			targetPackage="com.wujunxuan.crud.bean"
+			targetProject="/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java">
+			<property
+				name="enableSubPackages"
+				value="true" />
+			<property
+				name="trimStrings"
+				value="true" />
+		</javaModelGenerator>
+
+		<!-- sql relation -->
+		<sqlMapGenerator
+			targetPackage="mapper"
+			targetProject="/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/resources">
+			<property
+				name="enableSubPackages"
+				value="true" />
+		</sqlMapGenerator>
+
+		<!-- dao interface -->
+		<javaClientGenerator
+			type="XMLMAPPER"
+			targetPackage="com.wujunxuan.crud.dao"
+			targetProject="/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java">
+			<property
+				name="enableSubPackages"
+				value="true" />
+		</javaClientGenerator>
+
+		<!-- table -->
+		<table
+
+			tableName="tbl_emp"
+			domainObjectName="Employee">
+
+		</table>
+		<table
+
+			tableName="tbl_dept"
+			domainObjectName="Department">
+
+		</table>
+
+	</context>
+</generatorConfiguration>
