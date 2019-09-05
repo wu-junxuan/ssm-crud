@@ -22,7 +22,7 @@
 
 		<jdbcConnection
 			driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://127.0.0.1:3306/ssm_crud?useUnicode=true&amp;characterEncoding=UTF-8"
+			connectionURL="jdbc:mysql://127.0.0.1:3306/ssm_crud?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=false"
 			userId="root"
 			password="wjx122003">
 		</jdbcConnection>
@@ -77,6 +77,8 @@
 			domainObjectName="Department">
 
 		</table>
+		<!-- java -jar /Users/wujunxuan/Desktop/tools/mavenRepository/org/mybatis/generator/mybatis-generator-core/1.3.5/mybatis-generator-core-1.3.5.jar -configfile /Users/wujunxuan/eclipse_201906/ssm_crud/mbg.xml -overwrite
+		 -->
 
 	</context>
 </generatorConfiguration>
