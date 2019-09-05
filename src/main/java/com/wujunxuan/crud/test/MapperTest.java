@@ -17,7 +17,7 @@ public class MapperTest {
 	
 	@Test
 	public void testEMP() {
-		System.out.println(System.getProperty("java.class.path"));
+		System.out.println(departmentMapper);
 		
 	}
 

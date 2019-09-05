@@ -31,15 +31,15 @@
 		></property>
 		<property
 			name="driverClass"
-			value="jdbc.driverClass"
+			value="${jdbc.driverClass}"
 		></property>
 		<property
 			name="user"
-			value="jdbc.user"
+			value="${jdbc.user}"
 		></property>
 		<property
 			name="password"
-			value="jdbc.password"
+			value="${jdbc.password}"
 		></property>
 	</bean>
 
@@ -53,7 +53,7 @@
 		></property>
 		<property
 			name="dataSource"
-			value="pooledDataSource"
+			ref="pooledDataSource"
 		></property>
 		<property
 			name="mapperLocations"
