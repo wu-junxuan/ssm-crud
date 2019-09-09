@@ -68,6 +68,7 @@
 		></property>
 	</bean>
 
+<!-- 批量插入数据必用 -->
 	<bean
 		id="sqlSession"
 		class="org.mybatis.spring.SqlSessionTemplate"

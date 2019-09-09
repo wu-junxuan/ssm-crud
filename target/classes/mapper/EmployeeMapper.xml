@@ -171,8 +171,7 @@
 		emp_id, emp_name, gender, email, d_id
 	</sql>
 	<sql id="WithDept_Column_List">
-		e.emp_id, e.emp_name, e.gender, e.email, e.d_id, d.dept_id,
-		d.dept_name
+		e.emp_id,e.emp_name,e.gender,e.email,e.d_id,d.dept_id,d.dept_name
 	</sql>
 	<!-- List<Employee> selectByExampleWithDept(EmployeeExample example); -->
 	<select
@@ -184,7 +183,7 @@
 			distinct
 		</if>
 		<include refid="WithDept_Column_List" />
-		FROM tbl_emp e LEFT JOIN tbl_dept d ON e.d_id = d.dept_id;
+		FROM tbl_emp e LEFT JOIN tbl_dept d ON e.d_id = d.dept_id
 		<if test="_parameter != null">
 			<include refid="Example_Where_Clause" />
 		</if>
@@ -199,10 +198,10 @@
 	>
 		select
 		<include refid="WithDept_Column_List" />
-		FROM tbl_emp e LEFT JOIN tbl_dept d ON e.d_id = d.dept_id;
-		where emp_id
-		= #{empId,jdbcType=INTEGER}
-
+		FROM tbl_emp e
+		left join tbl_dept d on e.d_id=d.dept_id
+		where emp_id =
+		#{empId,jdbcType=INTEGER}
 	</select>
 	<select
 		id="selectByExample"
