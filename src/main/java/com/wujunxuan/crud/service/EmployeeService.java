@@ -19,12 +19,24 @@ public class EmployeeService {
 	@Autowired
 	EmployeeMapper employeeMapper;
 
+	
+	
+	
+	/**
+	 * 员工更新
+	 * @param employee
+	 */
+	public void updateEmp(Employee employee) {
+		employeeMapper.updateByPrimaryKeySelective(employee);
+	}
+	
+	
 	/**
 	 * 查询所有员工
 	 * @return
 	 */
 	public List<Employee> getAll() {
-		// TODO Auto-generated method stub
+		
 		return employeeMapper.selectByExampleWithDept(null);
 	}
 
@@ -52,6 +64,22 @@ public class EmployeeService {
 	public Employee getEmp(Integer id) {
 		Employee employee = employeeMapper.selectByPrimaryKey(id);
 		return employee;
+	}
+
+
+	public void deleteEmp(Integer id) {
+		employeeMapper.deleteByPrimaryKey(id);
+		
+	}
+
+
+	public void deleteBatch(List<Integer> del_ids) {
+		EmployeeExample example = new EmployeeExample();
+		Criteria criteria = example.createCriteria();
+		//delete from xxx where emp_id in(1,2,3)
+		criteria.andEmpIdIn(del_ids);
+		employeeMapper.deleteByExample(example);
+		
 	}
 
 

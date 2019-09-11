@@ -1,0 +1,14 @@
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/bean/Department.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/bean/EmployeeExample.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/dao/EmployeeMapper.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/test/ControllerTest.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/bean/DepartmentExample.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/service/DepartmentService.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/bean/Msg.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/bean/Employee.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/test/MapperTest.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/service/EmployeeService.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/test/MBGTest.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/dao/DepartmentMapper.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/controller/DepartmantController.java
+/Users/wujunxuan/eclipse-workspace/ssm-crud/src/main/java/com/wujunxuan/crud/controller/EmployeeController.java

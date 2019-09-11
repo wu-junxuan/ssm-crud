@@ -168,7 +168,7 @@
 		<div class="row">
 			<div class="col-md-4 col-md-offset-8">
 				<button class="btn btn-primary" id="emp_add_modal_btn">add</button>
-				<button class="btn btn-danger">delete</button>
+				<button class="btn btn-danger" id="emp_delete_all_btn">delete</button>
 
 			</div>
 		</div>
@@ -176,6 +176,7 @@
 			<table class="table table-hover" id="emps_table">
 				<thead>
 					<tr>
+						<th><input type="checkbox" id="check_all"></th>
 						<th>#</th>
 						<th>empName</th>
 						<th>gender</th>
@@ -232,6 +233,7 @@
 			var emps = result.extend.pageInfo.list;
 			$.each(emps, function(index, item) {
 				/* alert(index+":"+item.empName); */
+				var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>");
 				var empIdTd = $("<td></td>").append(item.empId);
 				var empNameTd = $("<td></td>").append(item.empName);
 				/* var gender=item.gender=="M"?"男":"女"; */
@@ -249,9 +251,10 @@
 						"btn btn-danger btn-sm delete_btn").append("<span></span>")
 						.addClass("glyphicon glyphicon glyphicon-trash")
 						.append("delete");
+				delBtn.attr("del-id",item.empId);
 				var btn = $("<td></td>").append(editbtn).append(" ").append(
 						delBtn);
-				$("<tr></tr>").append(empIdTd).append(empNameTd).append(
+				$("<tr></tr>").append(checkBoxTd).append(empIdTd).append(empNameTd).append(
 						genderTd).append(emailTd).append(deptNameTd)
 						.append(btn).appendTo("#emps_table tbody");
 			});
@@ -482,6 +485,25 @@
 			
 		});
 		
+		$(document).on("click",".delete_btn",function(){
+			//alert($(this).parents("tr").find("td:eq(1)").text());
+			var empId=$(this).attr("del-id");
+			var empName=$(this).parents("tr").find("td:eq(2)").text();
+			if(confirm("确认删除【"+empName+"】?")){
+				$.ajax({
+					url:"${APP_PATH}/emp/"+empId,
+					type:"DELETE",
+					success:function(result){
+						alert(result.msg);
+						
+					}
+					
+				});
+			}
+		}); 
+		
+		
+		
 		//1、我们是按钮创建之前就绑定了click，所以绑定不上。
 		//1）、可以在创建按钮的时候绑定。    2）、绑定点击.live()
 		//jquery新版没有live，使用on进行替代
@@ -506,10 +528,79 @@
 				url:"${APP_PATH}/emp/"+id,
 				type:"GET",
 				success:function(result){
-					console.log(result);
+					//console.log(result);
+					var empData = result.extend.emp;
+					$("#empName_update_static").text(empData.empName);
+					$("#email_update_input").val(empData.email);
+					$("#empUpdateModal input[name=gender]").val([empData.gender]);
+					$("#empUpdateModal select").val([empData.dId]);
 				}
 			});
 		}
+		//点击更新，更新员工信息
+		$("#emp_update_btn").click(function(){
+			//验证邮箱是否合法
+			//1、校验邮箱信息
+			var email = $("#email_update_input").val();
+			var regEmail = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+			if(!regEmail.test(email)){
+				show_validate_msg("#email_update_input", "error", "邮箱格式不正确");
+				return false;
+			}else{
+				show_validate_msg("#email_update_input", "success", "");
+			}
+			
+			//2、发送ajax请求保存更新的员工数据
+			$.ajax({
+				url:"${APP_PATH}/emp/"+$(this).attr("edit-id"),
+				type:"PUT",
+				data:$("#empUpdateModal form").serialize(),
+				success:function(result){
+					/* alert(result.msg); */
+					 //1、关闭对话框
+					$("#empUpdateModal").modal("hide");
+					//2、回到本页面
+					to_page(currentPage);
+				} 
+			});
+		});
+		
+		$("#check_all").click(function(){
+			//未选中为undefined 
+			//alert($(this).prop("checked"));
+			
+			$(".check_item").prop("checked",$(this).prop("checked"));
+		});
+		
+		$(document).on("click",".check_item",function(){
+			//判断当前选择中的元素是否5个
+			var flag = $(".check_item:checked").length==$(".check_item").length;
+			$("#check_all").prop("checked",flag);
+		});
+		
+		
+		$("#emp_delete_all_btn").click(function(){
+			var empNames="";
+			var del_idstr="";
+			$.each($(".check_item:checked"),function(){
+				empNames+=$(this).parents("tr").find("td:eq(2)").text()+",";
+				del_idstr += $(this).parents("tr").find("td:eq(1)").text()+"-";
+			});
+			empNames=empNames.substring(0,empNames.length-1);
+			del_idstr = del_idstr.substring(0, del_idstr.length-1);
+			if(confirm("确认删除【"+empNames+"】吗？")){
+				//发送ajax请求删除
+				$.ajax({
+					url:"${APP_PATH}/emp/"+del_idstr,
+					type:"DELETE",
+					success:function(result){
+						alert(result.msg);
+						//回到当前页面
+						to_page(currentPage);
+					}
+				});
+			}
+		});
 		
 		
 	</script>
